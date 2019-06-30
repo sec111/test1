@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>test</title>
+    <script src="rem.js"></script>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="opt_container">
+        <div class="opt_exc opt_tab opt_border">
+            <p class="opt_infor opt_infor_textColor">高级版</p>
+            <p class="opt_infor1 opt_infor1_textColor">适合独立摄影师</p>
+        </div>
+        <div class="opt_def opt_tab">
+            <p class="opt_infor">定制版</p>
+            <p class="opt_infor1">适合小型工作室</p>
+        </div>
+    </div>
+    <div class="excs">
+        <p class="excs_intro"> <span class="banben">高级版</span> <span class="excs_infor">（适合<span class="excs_id">独立摄影师</span>）</span> </p>
+        <div class="exc_tabs">
+            <!-- <div class="exc_tab">
+                <div class="exc_circle">A</div>
+                <p class="exc_text">标题1</p>
+            </div> -->
+        </div>
+    </div>
+    <div class="bg">
+        <div class="moudle">
+            <p class="moudle_title">hahhah </p>
+            <p class="moudle_content">高级版正文高级版正文高级版正文高级版正文高级版正文高级版正文高级版正文高级版正文高级版正文高级版正文高级版正文高级版正文高级版正文</p>
+        </div>
+        <div class="close">X</div>
+    </div>
+    <script src="jquery-1.11.3.js"></script>
+    <script>
+       
+        function init(){
+           $('.exc_circle').addClass('circle_blur')
+           $('.exc_text').addClass('text_blur')
+        }
+        function exc(){//高级
+            $('.exc_tabs').find('.exc_tab').eq(0).find('.exc_circle').removeClass('circle_blur')
+            $('.exc_tabs').find('.exc_tab').eq(0).find('.exc_text').removeClass('text_blur')
+
+            $('.exc_tabs').find('.exc_tab').eq(2).find('.exc_circle').removeClass('circle_blur')
+            $('.exc_tabs').find('.exc_tab').eq(2).find('.exc_text').removeClass('text_blur')
+
+            $('.exc_tabs').find('.exc_tab').eq(3).find('.exc_circle').removeClass('circle_blur')
+            $('.exc_tabs').find('.exc_tab').eq(3).find('.exc_text').removeClass('text_blur')
+
+            $('.exc_tabs').find('.exc_tab').eq(7).find('.exc_circle').removeClass('circle_blur')
+            $('.exc_tabs').find('.exc_tab').eq(7).find('.exc_text').removeClass('text_blur')
+
+            $('.exc_tabs').find('.exc_tab').eq(9).find('.exc_circle').removeClass('circle_blur')
+            $('.exc_tabs').find('.exc_tab').eq(9).find('.exc_text').removeClass('text_blur')
+        }
+        function customer(){//定制
+            $('.exc_circle').removeClass('circle_blur')
+            $('.exc_text').removeClass('text_blur')
+        }
+        for(var i=0;i<10;i++){
+            $('.exc_tabs').append("<div class='exc_tab'><div class='exc_circle'>A</div><p class='exc_text'>标题"+(i+1)+"</p></div>")
+        }
+        function init_title1(){
+            for(var i=0;i<10;i++){
+                $('.exc_tab').eq(i).find('.exc_text').html('标题'+(i+1))
+            }
+        }
+        function init_title2(){
+            for(var i=0;i<10;i++){
+                $('.exc_tab').eq(i).find('.exc_text').html('题目'+(i+1))
+            }
+        }
+        $('.opt_tab').click(function(){
+            //console.log(this)
+            $(this).addClass('opt_border')
+            $(this).find('.opt_infor').addClass('opt_infor_textColor');
+            $(this).find('.opt_infor1').addClass('opt_infor1_textColor');
+            $('.banben').html($(this).find('.opt_infor').html())
+            if($('.banben').html()=='高级版'){
+                $('.excs_id').html('独立摄影师')
+                init_title1()
+                init()
+                exc()
+            }else{
+                $('.excs_id').html('小型工作室')
+                init_title2()
+                init()
+                customer()
+            }
+            $(this).siblings('.opt_tab').removeClass('opt_border')
+            $(this).siblings('.opt_tab').find('.opt_infor').removeClass('opt_infor_textColor');
+            $(this).siblings('.opt_tab').find('.opt_infor1').removeClass('opt_infor1_textColor');
+            
+        })
+        function textcolor(){//随机颜色
+            var r = Math.floor(Math.random()*256)
+            var g = Math.floor(Math.random()*256)
+            var b = Math.floor(Math.random()*256)
+            return "rgb("+r+','+g+','+b+")"
+        }
+        $('.exc_tab').click(function(){
+            if($('.opt_exc').is('.opt_border')){
+                //console.log($('.opt_exc').find('.opt_infor').html())
+                if(!$(this).find('.exc_circle').is('.circle_blur')){
+                    $('.moudle_title').html($('.opt_exc').find('.opt_infor').html())
+                    $('.moudle_content').css('color',textcolor())
+                    $('.bg').fadeIn()
+                }
+            }else{
+                $('.moudle_title').html($('.opt_def').find('.opt_infor').html())
+                $('.moudle_content').css('color',textcolor())
+                $('.bg').fadeIn()
+            }
+        })
+        $('.close').click(function(){
+            $('.bg').fadeOut()
+        })
+        init()
+        exc()
+    </script>
+</body>
+</html>
